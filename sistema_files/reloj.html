@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://jmclass.com/reloj.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Reloj</title>
+    <style>
+		
+		@font-face {
+			font-family:LiquidCrystal;
+			src: url(LiquidCrystal-Normal.otf);
+		}
+	
+		body{
+			background:#000;
+			color:#63dcfa;
+			font-family:LiquidCrystal;
+			text-shadow: 0px 0px 4px  #00cdff;
+			
+			}
+			#fecha{
+			position: absolute;
+			  top:  50px; 
+			  right: 65px;
+			}
+			#pais{
+				position:absolute;
+				top:55px;
+				left:76px;
+				}
+			#reloj{
+				position:absolute;
+				top:100px;
+				left:90px;
+				}
+			table{
+				font-size:36px;
+				}
+			#tm{
+				position:absolute;
+				top:78px;
+				left:92px;}
+		#contenedor{
+			background:url("http://jmclass.com/fondo.jpg");
+			height:250px;
+			width:500px;
+			background-size:100%;
+			position: relative;
+			margin:0 auto;
+			}
+			.puntos {
+            animation: play .8s infinite;
+			}
+
+			@-webkit-keyframes play {
+			   from { opacity:0; }
+				 to { opacity:1; }
+			}
+		
+	</style>
+    
+    </head>
+    
+    <body>
+    	
+        	<div id="contenedor">
+            	<div id="fecha">11.May.2016</div>
+            	<div id="pais">Rep. Dom.</div>
+                <div id="tm">AM</div>
+                <div id="reloj">
+                <table>
+                	<tbody><tr>
+                    	<td id="horas">04</td>
+                        <td class="puntos">:</td>
+                        <td id="minutos">19</td>
+                        <td class="puntos">:</td>
+                        <td id="segundos">10</td>
+                    </tr>
+                </tbody></table>
+                </div>
+            	
+            </div>
+    
+    
+    
+
+<script>
+
+	//creamos un array de los meses
+	var meses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Agos","Sept","Oct","Nov","Dic"];
+
+	//ejecutamos la funcion cada 1 segundo
+	setInterval(reloj,1000);
+	function reloj(){
+			//obtenemos el tiempo
+			tiempo = new Date();
+			
+			//obtenemos la hora  parseInt(valor)=convertir de literal a numero
+			h = parseInt(   tiempo.getHours() );
+			m = parseInt( tiempo.getMinutes() );
+			s = parseInt( tiempo.getSeconds() );
+			
+			//cambiamos de formato hora de 24 a 12 
+			//ternario  h = ( la pregunta )? [si es verdadero] : [si es falso] ;
+				h = (h > 12 )?h-12:h;
+				
+			//para saver si es AM o PM
+			tm = (h > 12 )?"PM":"AM";	
+				
+			//agregamos un 0 si solo tienen una sifra
+			
+			//hora 
+				h = (h < 10 )?'0'+h:h;
+			//minutos 
+				m = (m < 10 )?'0'+m:m;
+			//segundos 
+				s = (s < 10 )?'0'+s:s;
+				
+				
+			//agregamos los valores al reloj
+			document.getElementById('horas').innerHTML      = h;
+			document.getElementById('minutos').innerHTML    = m;
+			document.getElementById('segundos').innerHTML   = s;
+			
+			document.getElementById('tm').innerHTML   = tm;
+			
+			
+			//para la fecha 
+			fecha= tiempo.getDate()+'.'+meses[tiempo.getMonth()]+"."+tiempo.getFullYear();
+			//mostramos la fecha
+			document.getElementById('fecha').innerHTML   = fecha;
+			
+		
+		
+		}
+
+</script>
+</body></html>
